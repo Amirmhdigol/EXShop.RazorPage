@@ -23,7 +23,7 @@ public class AuthService : IAuthService
 
     public async Task<ApiResult?> LogOut()
     {
-        var result = await _httpClient.DeleteAsync("Auth/Register");
+        var result = await _httpClient.DeleteAsync("Auth/logout");
         return await result.Content.ReadFromJsonAsync<ApiResult>();
     }
 
@@ -38,5 +38,5 @@ public class AuthService : IAuthService
     {
         var result = await _httpClient.PostAsJsonAsync("Auth/Register", command);
         return await result.Content.ReadFromJsonAsync<ApiResult>();
-    }
+    } 
 }
