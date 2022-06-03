@@ -80,8 +80,12 @@ public class ProductService : IProductService
 
     public async Task<ProductFilterResult?> GetProductByFilter(ProductFilterParams filterParams)
     {
-        var res = await _client.GetFromJsonAsync<ApiResult<ProductFilterResult>>($"product?filterparams={filterParams}");
-        return res?.Data;
+        var url = $"{ModuleName}?pageId={filterParams.PageId}&take={filterParams.Take}" +
+                   $"&slug={filterParams.Slug}&title={filterParams.Title}";
+        if (filterParams.Id != null)
+            url += $"&Id={filterParams.Id}";
+        var result = await _client.GetFromJsonAsync<ApiResult<ProductFilterResult>>(url);
+        return result?.Data;
     }
 
     public async Task<ProductDTO?> GetProductById(long productId)
@@ -98,8 +102,12 @@ public class ProductService : IProductService
 
     public async Task<ProductShopResult?> GetProductsForShopByFilter(ProductShopFilterParam filterParams)
     {
-        var res = await _client.GetFromJsonAsync<ApiResult<ProductShopResult>>($"product?filterparams={filterParams}");
-        return res?.Data;
+        var url = $"{ModuleName}?pageId={filterParams.PageId}&take={filterParams.Take}" +
+                        $"&categorySlug={filterParams.CategorySlug}&onlyAvailableProducts={filterParams.OnlyAvailableProducts}" +
+                        $"&search={filterParams.Search}&SearchOrderBy={filterParams.SearchOrderBy}&JustHasDiscount={filterParams.JustHasDiscount}";
+
+        var result = await _client.GetFromJsonAsync<ApiResult<ProductShopResult>>(url);
+        return result?.Data;
     }
 
     public async Task<ApiResult?> RemoveProductImage(RemoveProductImageCommand command)

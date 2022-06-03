@@ -1,0 +1,47 @@
+﻿@page
+@model EXShop.RazorPage.Pages.Auth.LoginModel
+@{
+    Layout = "Shared/Layouts/_AuthLayout";
+}
+<div class="auth-form shadow-around">
+    <div class="site-logo">
+        <a href="#">
+            <img src="/assets/images/logo.png" alt="logo">
+        </a>
+    </div>
+    <div class="auth-form-title">
+        ورود به سایت
+    </div>
+    <form method="post">
+@*        <div class="form-element-row">
+            <label for="phone-number" class="label-element">شماره موبایل</label>
+            <div class="form-element-with-icon">
+                <input type="text" asp-for="PhoneNumber" class="input-element" id="phone-number">
+                <span asp-validation-for="PhoneNumber"></span>
+                <i class="fad fa-mobile-alt"></i>
+            </div>
+        </div>
+        <div class="form-element-row">
+            <label for="phone-number" class="label-element">کلمه عبور</label>
+            <div class="form-element-with-icon">
+                <input type="password" asp-for="Password" class="input-element" id="phone-number">
+                <span asp-validation-for="Password"></span>
+                <i class="fad fa-mobile-alt"></i>
+            </div>
+        </div>
+*@    
+        @Html.EditorFor(m=>m.PhoneNumber)
+        @Html.EditorFor(m=>m.Password)
+        <div class="form-element-row text-left">
+            <button class="btn-element btn-info-element">
+                <i class="fad fa-sign-in-alt"></i>
+                ورود به سایت
+            </button>
+        </div>
+
+    </form>
+    <div class="auth-form-footer">
+        <span>کاربر جدید هستید؟</span>
+        <a asp-page="Register" class="link--with-border-bottom">ثبت نام در همتا</a>
+    </div>
+</div>

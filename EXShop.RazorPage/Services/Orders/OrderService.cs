@@ -34,7 +34,11 @@ public class OrderService : IOrderService
         var result = await _client.GetFromJsonAsync<ApiResult<OrderDTO>>($"order/{orderId}");
         return result?.Data;
     }
-
+    public async Task<OrderDTO?> GetCurrentOrder()
+    {
+        var result = await _client.GetFromJsonAsync<ApiResult<OrderDTO?>>($"order/current");
+        return result?.Data;
+    }
     public async Task<ApiResult?> IncreaseItemCount(ChangeOrderItemCountCommand command)
     {
         var result = await _client.PutAsJsonAsync("order/IncreaseOrderItemCount", command);
@@ -51,5 +55,5 @@ public class OrderService : IOrderService
     {
         var result = await _client.DeleteAsync($"order/Orderitem/{command.ItemId}");
         return await result.Content.ReadFromJsonAsync<ApiResult>();
-    }
+    }   
 }

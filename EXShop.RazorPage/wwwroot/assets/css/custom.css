@@ -1,0 +1,13 @@
+.field-validation-error {
+    color: red
+}
+#phone-number-error {
+    color: red
+}
+#password-error {
+    color: red
+}
+
+.input-validation-error {
+    border-color: red !important;
+}

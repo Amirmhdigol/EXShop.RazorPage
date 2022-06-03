@@ -11,5 +11,6 @@ public interface IOrderService
     Task<ApiResult?> RemoveOrderItem(RemoveOrdertemCommand command);
 
     Task<OrderDTO?> GetOrderById(long orderId);
+    Task<OrderDTO?> GetCurrentOrder();
     Task<OrderFilterResult?> GetFilteresOrders(OrderFilterParams filterParams);
 }

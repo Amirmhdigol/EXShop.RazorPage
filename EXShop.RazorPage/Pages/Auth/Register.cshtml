@@ -1,0 +1,72 @@
+﻿@page
+@model EXShop.RazorPage.Pages.Auth.RegisterModel
+@{
+    Layout = "Shared/Layouts/_AuthLayout";
+}
+<div class="auth-form shadow-around">
+    <div class="site-logo">
+        <a href="#">
+            <img src="/assets/images/logo.png" alt="logo">
+        </a>
+    </div>
+    <div class="auth-form-title">
+        ثبت نام سایت
+    </div>
+    <form method="post">
+@*        <div class="form-element-row">
+            <label for="phone-number" class="label-element">شماره موبایل</label>
+            <div class="form-element-with-icon">
+                <input type="text" asp-for="PhoneNumber" class="input-element" id="phone-number">
+                <span asp-validation-for="PhoneNumber"></span>
+                <i class="fad fa-mobile-alt"></i>
+            </div>
+        </div>
+        <div class="form-element-row">
+            <label for="password" class="label-element">
+                <span class="d-flex justify-content-between">
+                    <span>کلمه عبور</span>
+                </span>
+            </label>
+            <div class="form-element-with-icon">
+                <input type="password" asp-for="Password" class="input-element" id="password">
+                <span asp-validation-for="Password"></span>
+                <i class="fad fa-key-skeleton"></i>
+            </div>
+        </div>
+        <div class="form-element-row">
+            <label for="password" class="label-element">
+                <span class="d-flex justify-content-between">
+                    <span> تکرار کلمه عبور</span>
+                </span>
+            </label>
+            <div class="form-element-with-icon">
+                <input type="password" asp-for="ConfirmPassword" class="input-element" id="password">
+                <span asp-validation-for="ConfirmPassword"></span>
+                <i class="fad fa-key-skeleton"></i>
+            </div>
+        </div>
+*@
+        @Html.EditorFor(m=>m.PhoneNumber)
+        @Html.EditorFor(m=>m.Password)
+        @Html.EditorFor(m=>m.ConfirmPassword)
+
+        <div class="form-element-row">
+            <label class="container-checkbox">
+                مرا به خاطر داشته باش
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="form-element-row text-left">
+            <button class="btn-element btn-info-element">
+                <i class="fad fa-sign-in-alt"></i>
+                ثبت نام به سایت
+            </button>
+        </div>
+
+    </form>
+    <div class="auth-form-footer">
+        <span>اکانتی دارید ؟</span>
+        <a asp-page="Login" class="link--with-border-bottom">ورود به سابت</a>
+    </div>
+</div>

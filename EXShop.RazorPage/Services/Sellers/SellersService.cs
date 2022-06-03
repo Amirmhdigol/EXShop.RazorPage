@@ -1,4 +1,5 @@
-﻿using EXShop.RazorPage.Models;
+﻿using EXShop.RazorPage.Infrastructure;
+using EXShop.RazorPage.Models;
 using EXShop.RazorPage.Models.Sellers;
 
 namespace EXShop.RazorPage.Services.Sellers;
@@ -38,7 +39,10 @@ public class SellersService : ISellerService
 
     public async Task<SellerFilterResult?> GetSellersByFilter(SellerFilterParams filterParams)
     {
-        var res = await _client.GetFromJsonAsync<ApiResult<SellerFilterResult>>($"seller");
-        return res?.Data;
+        var url = filterParams.GenerateBaseFilterUrl("seller") +
+                          $"&NationalCode={filterParams.NationalCode}&ShopName={filterParams.ShopName}";
+
+        var result = await _client.GetFromJsonAsync<ApiResult<SellerFilterResult>>(url);
+        return result.Data;
     }
 }
