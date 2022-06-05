@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EXShop.RazorPage.Pages
 {
-    [Authorize]
+    
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

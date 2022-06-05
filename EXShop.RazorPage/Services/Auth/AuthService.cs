@@ -25,9 +25,10 @@ public class AuthService : IAuthService
     {
         try
         {
-            var result = await _httpClient.DeleteAsync("Auth/logout");
+            var result = await _httpClient.DeleteAsync("Auth/LogOut");
             return await result.Content.ReadFromJsonAsync<ApiResult>();
         }
+        
         catch (Exception)
         {
             return ApiResult.Error();

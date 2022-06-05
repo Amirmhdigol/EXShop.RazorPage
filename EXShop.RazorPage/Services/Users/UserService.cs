@@ -18,8 +18,8 @@ public class UserService : IUserService
 
     public async Task<ApiResult?> ChangeUserPassword(ChangePasswordCommand command)
     {
-        var res = await _client.PutAsJsonAsync("users/ChangePassword", command);
-        return await res.Content.ReadFromJsonAsync<ApiResult>();
+        var res = await _client.PutAsJsonAsync("User/ChangePassword", command);
+         return await res.Content.ReadFromJsonAsync<ApiResult>();
     }
 
     public async Task<ApiResult?> CreateUser(CreateUserCommand command)

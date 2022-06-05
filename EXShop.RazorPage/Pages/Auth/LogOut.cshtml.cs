@@ -15,6 +15,11 @@ public class LogOutModel : BaseRazorPage
     public async Task<IActionResult> OnGet()
     {
         var res = await _service.LogOut();
+        if (res.IsSuccess)
+        {
+            HttpContext.Response.Cookies.Delete("token");
+            HttpContext.Response.Cookies.Delete("refresh-token");
+        }
         return RedirectAndShowAlert(res, RedirectToPage("../Index"));
     }
 }

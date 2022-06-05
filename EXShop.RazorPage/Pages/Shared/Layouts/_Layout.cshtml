@@ -24,8 +24,8 @@
 
 <body>
     <div class="page-wrapper">
-        <partial name="_Header"/>
-        <partial name="_ResponsiveHeader"/>
+        <partial name="_Header" />
+        <partial name="_ResponsiveHeader" />
         <main class="page-content">
             <div class="container">
                 @RenderBody()
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <partial name="_Footer"/>
+        <partial name="_Footer" />
     </div>
 
     <!-- JS Global Compulsory -->
@@ -60,6 +60,8 @@
     <script src="/assets/js/plugins/swiper.min.js"></script>
     <script src="/assets/js/plugins/ResizeSensor.min.js"></script>
     <script src="/assets/js/plugins/theia-sticky-sidebar.min.js"></script>
+    <partial name="Shared/_ValidationScriptsPartial" />
+
     <script src="/assets/js/plugins/wNumb.js"></script>
     <!-- JS Template -->
     <script src="/assets/js/theme.js"></script>
