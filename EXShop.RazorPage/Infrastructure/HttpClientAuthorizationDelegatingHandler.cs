@@ -12,7 +12,6 @@ public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
         if (_httpContextAccessor.HttpContext != null)
         {
             var token = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString();
-
             if (!string.IsNullOrWhiteSpace(token))
             {
                 request.Headers.Add("Authorization", token);

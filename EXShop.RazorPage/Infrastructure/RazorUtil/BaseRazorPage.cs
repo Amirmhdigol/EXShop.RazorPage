@@ -107,7 +107,7 @@ public class BaseRazorPage : PageModel
             if (isPost && !ModelState.IsValid && checkModelState)
             {
                 var errors = JoinErrors();
-                var modelError = new AjaxResult()
+                var modelError = new AjaxResult
                 {
                     Status = AppStatusCode.ServerError,
                     Title = "عملیات ناموفق",
@@ -119,7 +119,7 @@ public class BaseRazorPage : PageModel
             }
 
             var res = await func().ConfigureAwait(false);
-            var model = new AjaxResult()
+            var model = new AjaxResult
             {
                 Status = res.MetaData.AppStatusCode,
                 Title = null,
@@ -127,7 +127,7 @@ public class BaseRazorPage : PageModel
             };
             switch (res.MetaData.AppStatusCode)
             {
-                case AppStatusCode.Success:
+                 case AppStatusCode.Success:
                     {
                         model.IsReloadPage = isSuccessReloadPage;
                         var jsonResult = JsonConvert.SerializeObject(model);
@@ -247,7 +247,7 @@ public class BaseRazorPage : PageModel
         catch (Exception ex)
         {
             var res = ApiResult.Error(ex.Message);
-            var model = new AjaxResult()
+            var model = new AjaxResult
             {
                 Status = res.MetaData.AppStatusCode,
                 Title = null,

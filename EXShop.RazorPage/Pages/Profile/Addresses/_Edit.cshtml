@@ -1,0 +1,87 @@
+﻿@model EXShop.RazorPage.Models.UserAddress.EditUserAddressViewModel
+
+<form method="post" data-ajax="true" asp-page="Index" asp-page-handler="EditAddress">
+    @Html.HiddenFor(a=>a.Id)
+    <div class="row">
+        <div class="col-lg-6 mb-3">
+            @Html.EditorFor(a => a.Province)
+        </div>
+
+        <div class="col-lg-6 mb-3">
+            @Html.EditorFor(a => a.City)
+        </div>
+
+        <div class="col-lg-12 mb-3">
+            @Html.EditorFor(a => a.PostalCode)
+        </div>
+
+        <div class="col-lg-12 mb-3">
+            @Html.EditorFor(a => a.PostalAddress)
+        </div>
+
+        <div class="col-lg-6 mb-3">
+            @Html.EditorFor(a => a.Name)
+        </div>
+
+        <div class="col-lg-6 mb-3">
+            @Html.EditorFor(a => a.PhoneNumber)
+        </div>
+
+        <div class="col-lg-6 mb-3">
+            @Html.EditorFor(a => a.NationalCode)
+        </div>
+
+        <div class="col-lg-6 mb-3">
+            @Html.EditorFor(a => a.Family)
+        </div>
+        @*        <div class="col-lg-6 mb-3">
+            <div class="text-sm text-muted mb-1">شماره موبایل:</div>
+            <div class="text-dark font-weight-bold">
+                <div class="form-element-row mb-0">
+                    <input type="text" class="input-element dir-ltr" value="090********">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-3">
+            <div class="text-sm text-muted mb-1">استان:</div>
+            <div class="text-dark font-weight-bold">
+                <div class="form-element-row mb-0">
+                    <select name="" id="" class="select2">
+                        <option value="0">انتخاب استان</option>
+                        <option value="1">خراسان شمالی</option>
+                        <option value="2">تهران</option>
+                        <option value="3">تبریز</option>
+                        <option value="4">شیراز</option>
+                        <option value="5">کرمان</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mb-3">
+            <div class="text-sm text-muted mb-1">شهر:</div>
+            <div class="text-dark font-weight-bold">
+                <div class="form-element-row mb-0">
+                    <select name="" id="" class="select2">
+                        <option value="0">انتخاب شهر</option>
+                        <option value="1">بجنورد</option>
+                        <option value="2">شیروان</option>
+                        <option value="3">اسفراین</option>
+                        <option value="4">مانه و سملقان</option>
+                        <option value="5">راز و جرگلان</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-3">
+            <div class="text-sm text-muted mb-1">آدرس کامل:</div>
+            <div class="text-dark font-weight-bold">
+                <div class="form-element-row mb-0">
+                    <textarea name="address" id="address" cols="30" rows="10" class="input-element"></textarea>
+                </div>
+            </div>
+        </div>
+*@ </div>
+    <button type="submit" class="btn btn-primary">
+        ذخیره تغییرات <i class="fad fa-money-check-edit"></i>
+    </button>
+</form>

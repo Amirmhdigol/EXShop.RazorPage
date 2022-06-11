@@ -21,7 +21,7 @@ public class UserAddressService : IUserAddressService
 
     public async Task<ApiResult?> DeleteAddress(long addressId)
     {
-        var res = await _Client.DeleteAsync("UserAddress");
+        var res = await _Client.DeleteAsync($"UserAddress/{addressId}");
         return await res.Content.ReadFromJsonAsync<ApiResult>();
     }
 
@@ -39,7 +39,7 @@ public class UserAddressService : IUserAddressService
 
     public async Task<List<AddressDTO>?> GetAddressesList()
     {
-        var res = await _Client.GetFromJsonAsync<ApiResult<List<AddressDTO>>>($"UserAddress");
+        var res = await _Client.GetFromJsonAsync<ApiResult<List<AddressDTO>>>("UserAddress");
         return res?.Data;
     }
 }

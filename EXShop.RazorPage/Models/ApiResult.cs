@@ -54,13 +54,43 @@ public class ApiResult
             }
         };
     }
+
 }
 public class ApiResult<TData>
 {
     public bool IsSuccess { get; set; }
     public MetaData MetaData { get; set; }
     public TData Data { get; set; }
+
+    public static ApiResult<TData> Success(TData data)
+    {
+        return new ApiResult<TData>()
+        {
+            IsSuccess = true,
+            Data = data,
+            MetaData = new MetaData()
+            {
+                AppStatusCode = AppStatusCode.Success,
+                Message = "عملیات با موفقیت انجام شد"
+            }
+        };
+    }
+    public static ApiResult<TData> Error()
+    {
+        return new ApiResult<TData>()
+        {
+            IsSuccess = true,
+            Data = default(TData),
+            MetaData = new MetaData()
+            {
+                AppStatusCode = AppStatusCode.LogicError,
+                Message = "عملیات ناموفق"
+            }
+        };
+    }
 }
+
+
 
 public class MetaData
 {

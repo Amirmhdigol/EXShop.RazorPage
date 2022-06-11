@@ -181,7 +181,6 @@ function OpenModal(url, name, title) {
             }
         }
     });
-
 }
 
 function CallBackHandler(result) {

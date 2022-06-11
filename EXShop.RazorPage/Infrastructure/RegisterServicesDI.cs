@@ -19,6 +19,8 @@ public static class RegisterServicesDI
 
         services.AddHttpContextAccessor();
         services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+        services.AddTransient<IRenderViewToString, RenderViewToString>();
+        services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
         services.AddHttpClient<IAuthService, AuthService>(httpClient =>
         {

@@ -1,9 +1,20 @@
 .field-validation-error {
     color: red
 }
+
 #phone-number-error {
     color: red
 }
+.delete-address {
+    position: absolute;
+    bottom: 15px 
+}
+
+.delete-address button {
+    color: red ;
+    border-color: red 
+}
+
 #password-error {
     color: red
 }
@@ -11,3 +22,4 @@
 .input-validation-error {
     border-color: red !important;
 }
+
