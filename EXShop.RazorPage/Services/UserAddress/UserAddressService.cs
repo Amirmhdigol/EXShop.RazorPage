@@ -25,6 +25,12 @@ public class UserAddressService : IUserAddressService
         return await res.Content.ReadFromJsonAsync<ApiResult>();
     }
 
+    public async Task<ApiResult?> SetActiveAddress(long addressId)
+    {
+        var res = await _Client.PutAsync($"UserAddress/SetActiveAddress/{addressId}",null);
+        return await res.Content.ReadFromJsonAsync<ApiResult>();
+    }
+
     public async Task<ApiResult?> EditAddress(EditUserAddressCommand command)
     {
         var res = await _Client.PutAsJsonAsync("UserAddress", command);

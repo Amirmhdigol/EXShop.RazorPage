@@ -27,10 +27,14 @@ public class LoginModel : BaseRazorPage
     [MinLength(5, ErrorMessage = "کلمه عبور باید بیشتر از 5 کاراکتر باشد")]
     [DataType(DataType.Password)]
     public string Password { get; set; }
+    public string? RedirectTo { get; set; }
 
-    public IActionResult OnGet()
+    public IActionResult OnGet(string? redirectTo)
     {
         if (User.Identity.IsAuthenticated) return Redirect("/");
+
+        if (redirectTo != null) RedirectTo = redirectTo;
+
         return Page();
     }
     public async Task<IActionResult> OnPost()
@@ -42,12 +46,12 @@ public class LoginModel : BaseRazorPage
             ModelState.AddModelError(nameof(PhoneNumber), res.MetaData.Message);
             return Page();
         }
-
         var token = res.Data.Token;
         var Retoken = res.Data.RefreshToken;
-
         HttpContext.Response.Cookies.Append("token", token);
         HttpContext.Response.Cookies.Append("Refreshtoken", Retoken);
+
+        if (!string.IsNullOrWhiteSpace(RedirectTo)) return LocalRedirect(RedirectTo);
 
         return Redirect("/");
     }

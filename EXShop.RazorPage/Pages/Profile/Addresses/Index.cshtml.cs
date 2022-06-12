@@ -41,7 +41,24 @@ public class IndexModel : BaseRazorPage
             return res;
         });
     }
+    public async Task<IActionResult> OnPostEditAddress(EditUserAddressViewModel viewModel)
+    {
+        return await AjaxTryCatch(async () =>
+        {
+            var model = _mapper.Map<EditUserAddressCommand>(viewModel);
+            var result = await _userAddressService.EditAddress(model);
 
+            return result;
+        }, true);
+    }
+    public async Task<IActionResult> OnGetSetActiveAddress(long addressId)
+    {
+        return await AjaxTryCatch(async () =>
+        {
+            var result = await _userAddressService.SetActiveAddress(addressId);
+            return result;
+        }, true);
+    }
     public async Task<IActionResult> OnGetShowAddPage()
     {
         return await AjaxTryCatch(async () =>

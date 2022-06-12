@@ -15,12 +15,25 @@
                 <div class="row mx-0">
                     @foreach (var item in Model.Addresses)
                     {
+                        var id = $"customRadio{item.Id}";
                         <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
                             <div class="custom-control custom-radio">
-                                <input type="radio" id="customRadio1" checked="@(item.ActiveAddress?"checked":null)" name="customRadio"
+                                <input type="radio" id="@id" checked="@(item.ActiveAddress?"checked":null)" name="customRadio"
                                    class="custom-control-input">
-                                <label class="custom-control-label address-select" for="customRadio1">
-                                    <span class="head-address-select">به این آدرس ارسال شود</span>
+                                <label class="custom-control-label address-select" for="@id">
+                                    @if (item.ActiveAddress)
+                                    {
+                                        <span class="head-address-select">به این آدرس ارسال شود</span>
+                                    }
+                                    else
+                                    {
+                                        <span onclick="activeAddress('@item.Id')" class="head-address-select">به این آدرس ارسال شود</span>
+                                    @*    <script type="text/javascript">
+                                            var btn = document.getElementById("btt");
+                                            btn.addEventListener("click", SetActiveAddress(@item.Id)
+                                            , false);  
+                                        </script>*@
+                                    }
                                     <span>@item.PostalAddress</span>
                                     <span>
                                         <i class="fa fa-user"></i>
@@ -33,9 +46,9 @@
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <form method="post" class="delete-address">
-                                        <input type="hidden" name="addressId" value="@item.Id"/>
+                                        <input type="hidden" name="addressId" value="@item.Id" />
                                         <button href="#" type="submit" class="link--with-border-bottom"
-                                                onclick="return confirm('Are you sure?')">
+                                            onclick="return confirm('Are you sure?')">
                                             حذف
                                             <i class="fa fa-trash"></i>
                                         </button>

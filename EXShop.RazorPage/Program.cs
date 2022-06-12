@@ -5,12 +5,22 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddAuthorization(option =>
+{
+    option.AddPolicy("Account", builder =>
+    {
+        builder.RequireAuthenticatedUser();
+    });
+});
+
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddRazorPagesOptions(options =>
+{
+    options.Conventions.AuthorizeFolder("/Profile", "Account");
+});
 
 builder.Services.RegisterApiServices();
-builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(option =>
 {
     option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -29,14 +39,10 @@ builder.Services.AddAuthentication(option =>
         ValidateIssuerSigningKey = true
     };
 });
-
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 app.Use(async (context, next) =>
@@ -48,15 +54,22 @@ app.Use(async (context, next) =>
     }
     await next();
 });
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
+
+app.Use(async (context, next) =>
+{
+    await next();
+    var status = context.Response.StatusCode;
+    if (status == 401)
+    {
+        var path = context.Request.Path;
+        context.Response.Redirect($"/auth/login?redirectTo={path}");
+    }
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapRazorPages();
-
 app.Run();
