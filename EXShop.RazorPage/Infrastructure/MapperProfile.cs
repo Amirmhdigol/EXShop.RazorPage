@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using EXShop.RazorPage.Models.UserAddress;
 using EXShop.RazorPage.Models.UserAddresses;
+using EXShop.RazorPage.ViewModels.Users.Addresses;
 
 namespace EXShop.RazorPage.Infrastructure;
 

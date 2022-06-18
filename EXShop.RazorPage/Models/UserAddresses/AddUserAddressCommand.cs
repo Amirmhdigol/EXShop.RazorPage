@@ -1,6 +1,6 @@
-﻿namespace EXShop.RazorPage.Models.UserAddress;
+﻿namespace EXShop.RazorPage.Models.UserAddresses;
 
-public class AddUserAddressCommand 
+public class AddUserAddressCommand
 {
     public long UserId { get; set; }
     public string Province { get; set; }

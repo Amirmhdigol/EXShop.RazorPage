@@ -1,8 +1,8 @@
 using AutoMapper;
 using EXShop.RazorPage.Models;
-using EXShop.RazorPage.Models.UserAddress;
 using EXShop.RazorPage.Models.UserAddresses;
 using EXShop.RazorPage.Services.UserAddress;
+using EXShop.RazorPage.ViewModels.Users.Addresses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

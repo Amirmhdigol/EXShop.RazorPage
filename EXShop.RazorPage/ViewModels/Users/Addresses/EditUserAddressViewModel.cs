@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EXShop.RazorPage.Models.UserAddress;
+namespace EXShop.RazorPage.ViewModels.Users.Addresses;
 
 public class EditUserAddressViewModel
 {

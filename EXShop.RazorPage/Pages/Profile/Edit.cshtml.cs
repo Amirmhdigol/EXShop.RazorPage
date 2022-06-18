@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Common.Application.Validation.CustomValidation.IFormFile;
+using EXShop.RazorPage.Infrastructure.Utils.CustomValidation.IFormFile;
 using EXShop.RazorPage.Models.Users;
 using EXShop.RazorPage.Services.Users;
 using Microsoft.AspNetCore.Authorization;

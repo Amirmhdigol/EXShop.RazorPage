@@ -1,4 +1,4 @@
-﻿namespace EXShop.RazorPage.Models.UserAddress;
+﻿namespace EXShop.RazorPage.Models.UserAddresses;
 
 public class EditUserAddressCommand
 {

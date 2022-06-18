@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace Common.Application.Validation.CustomValidation.IFormFile
+namespace EXShop.RazorPage.Infrastructure.Utils.CustomValidation.IFormFile
 {
     public class FileTypeAttribute : ValidationAttribute, IClientModelValidator
     {
@@ -32,7 +32,7 @@ namespace Common.Application.Validation.CustomValidation.IFormFile
             if (!context.Attributes.ContainsKey("data-val"))
                 context.Attributes.Add("data-val", "true");
             context.Attributes.Add("fileType", type);
-            context.Attributes.Add("accept",$".{type}");
+            context.Attributes.Add("accept", $".{type}");
             context.Attributes.Add("data-val-fileType", ErrorMessage);
         }
     }
