@@ -7,6 +7,6 @@ public class BannerDTO : BaseDTO
 }
 public enum BannerPosition
 {
-    زیر_اسلایدر,
-    سمت_راست_اسلایر
+    Under_Slider,
+    Right_Of_Slider
 }
