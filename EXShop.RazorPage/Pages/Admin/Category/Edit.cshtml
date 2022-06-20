@@ -1,0 +1,24 @@
+﻿@page "{id}"
+@model EXShop.RazorPage.Pages.Admin.Category.EditModel
+@{
+    ViewData["Title"] = "ویرایش دسته بندی";
+}
+<h3>@ViewData["Title"]</h3>
+
+<form class="card" method="post">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.EditorFor(a=>a.Title)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(a=>a.Slug)
+            </div>
+            @Html.EditorFor(a=>a.SeoData)
+        </div>
+    </div>
+    <div class="card-footer text-left">
+        <cancel></cancel>
+        <submit />
+    </div>
+</form>

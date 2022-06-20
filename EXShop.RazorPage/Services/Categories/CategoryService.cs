@@ -20,7 +20,7 @@ public class CategoryService : ICategoryService
 
     public async Task<ApiResult?> CreateCategory(CreateCategoryCommand command)
     {
-        var result = await _client.PostAsJsonAsync("Category", command);
+         var result = await _client.PostAsJsonAsync("Category", command);
         return await result.Content.ReadFromJsonAsync<ApiResult>();
     }
 

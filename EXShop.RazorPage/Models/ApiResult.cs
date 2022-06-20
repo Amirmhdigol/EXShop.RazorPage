@@ -90,8 +90,6 @@ public class ApiResult<TData>
     }
 }
 
-
-
 public class MetaData
 {
     public string Message { get; set; }

@@ -1,0 +1,62 @@
+﻿@page "{handler?}"
+@model EXShop.RazorPage.Pages.Admin.Category.IndexModel
+@{
+    ViewData["Title"] = "مدیریت دسته بندی ها";
+}
+<h3>@ViewData["Title"]</h3>
+<a asp-page="Add" class="btn btn-success mb-2">افزودن دسته بندی</a>
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>عنوان</th>
+                <th>slug</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td> @item.Title</td>
+                    <td>@item.Slug</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@item.Id">ویرایش</a>
+                        <a class="btn btn-sm btn-success" asp-page="Add" asp-route-parentId="@item.Id">افزودن زیرگروه</a>
+                        <delete-item url="@Url.Page("Index","Delete",new{categoryId= item.Id})">حذف</delete-item>
+                    </td>
+                </tr>
+                @if (item.Childs.Any())
+                {
+                    foreach (var child in item.Childs)
+                    {
+                        <tr style="background: cyan">
+                            <td> @child.Title</td>
+                            <td>@child.Slug</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@child.Id">ویرایش</a>
+                                <a class="btn btn-sm btn-success" asp-page="Add" asp-route-parentId="@child.Id">افزودن زیرگروه</a>
+                                <delete-item url="@Url.Page("Index","Delete",new{categoryId= child.Id})">حذف</delete-item>
+                            </td>
+                        </tr>
+                        @if (child.Childs.Any())
+                        {
+                            foreach (var secchild in child.Childs)
+                            {
+                                <tr style="background: pink">
+                                    <td> @secchild.Title</td>
+                                    <td>@secchild.Slug</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-id="@secchild.Id">ویرایش</a>
+@*                                        <a class="btn btn-sm btn-success" asp-page="Add" asp-route-parentId="@secchild.Id">افزودن زیرگروه</a>
+*@                                        <delete-item url="@Url.Page("Index","Delete",new{categoryId= secchild.Id})">حذف</delete-item>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
