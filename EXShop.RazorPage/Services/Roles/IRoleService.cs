@@ -6,9 +6,9 @@ public interface IRoleService
 {
     //Commands
     Task<ApiResult?> CreateRole(CreateRoleCommand command);
-    Task<ApiResult?> EditRole(EditRoleCommand command);
+    Task<ApiResult> EditRole(EditRoleCommand command);
 
     //Queries
     Task<RoleDTO?> GetRoleById(long roleId);
-    Task<List<RoleDTO>?> GetRoles();
+    Task<List<RoleDTO>> GetRoles();
 }

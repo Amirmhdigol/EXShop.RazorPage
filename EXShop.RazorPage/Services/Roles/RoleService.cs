@@ -11,13 +11,13 @@ public class RoleService : IRoleService
         _Client = client;
     }
 
-    public async Task<ApiResult?> CreateRole(CreateRoleCommand command)
+    public async Task<ApiResult> CreateRole(CreateRoleCommand command)
     {
         var res = await _Client.PostAsJsonAsync("role", command);
         return await res.Content.ReadFromJsonAsync<ApiResult>();
     }
 
-    public async Task<ApiResult?> EditRole(EditRoleCommand command)
+    public async Task<ApiResult> EditRole(EditRoleCommand command)
     {
         var res = await _Client.PutAsJsonAsync("role", command);
         return await res.Content.ReadFromJsonAsync<ApiResult>();
@@ -29,9 +29,9 @@ public class RoleService : IRoleService
         return res?.Data;
     }
 
-    public async Task<List<RoleDTO>?> GetRoles()
+    public async Task<List<RoleDTO>> GetRoles()
     {
-        var res = await _Client.GetFromJsonAsync<ApiResult<List<RoleDTO>?>>("role");
-        return res?.Data;
+        var res = await _Client.GetFromJsonAsync<ApiResult<List<RoleDTO>>>("role");
+        return res.Data;
     }
 }

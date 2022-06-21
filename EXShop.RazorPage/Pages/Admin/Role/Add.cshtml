@@ -1,0 +1,30 @@
+﻿@page
+@using EXShop.RazorPage.Models.Roles
+@model EXShop.RazorPage.Pages.Admin.Role.AddModel
+@{
+    ViewData["Title"] = "افزودن نقش";
+}
+<h3>@ViewData["Title"]</h3>
+
+<form class="card" method="post">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.EditorFor(a=>a.Title)
+            </div>
+            <div class="col-md-6">
+                <label>انتخاب دسترسی ها</label><br/>
+                <select class="select2 form-controlk" multiple="" name="permission[]">
+                    @foreach (var item in Enum.GetNames(typeof(Permission)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-left">
+        <cancel></cancel>
+        <submit />
+    </div>
+</form>
