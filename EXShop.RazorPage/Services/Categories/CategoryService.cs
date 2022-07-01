@@ -51,7 +51,7 @@ public class CategoryService : ICategoryService
 
     public async Task<List<ChildCategoryDTO>?> GetCategoryChilds(long parentId)
     {
-        var result = await _client.GetFromJsonAsync<ApiResult<List<ChildCategoryDTO>>>($"category/getChild/{parentId}");
+        var result = await _client.GetFromJsonAsync<ApiResult<List<ChildCategoryDTO>>>($"category/getChilds/{parentId}");
         return result?.Data;
     }
 }

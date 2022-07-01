@@ -16,4 +16,8 @@ public class Directories
     {
         return $"{SiteSettings.ServerPath}{BannerImages}/{imageName}";
     }
+    public static string GetProductImage(string imageName)
+    {
+        return $"{SiteSettings.ServerPath}{ProductImages}/{imageName}";
+    }
 }
