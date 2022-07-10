@@ -23,3 +23,8 @@ public enum Permission
     User_Management,
     Seller_Panel
 }
+
+public class LlongRoleId
+{
+    public long RoleId { get; set; }
+}

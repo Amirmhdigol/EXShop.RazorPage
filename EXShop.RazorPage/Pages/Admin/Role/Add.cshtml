@@ -3,6 +3,7 @@
 @model EXShop.RazorPage.Pages.Admin.Role.AddModel
 @{
     ViewData["Title"] = "افزودن نقش";
+    ViewData["selected"] = "roles";
 }
 <h3>@ViewData["Title"]</h3>
 
@@ -13,7 +14,7 @@
                 @Html.EditorFor(a=>a.Title)
             </div>
             <div class="col-md-6">
-                <label>انتخاب دسترسی ها</label><br/>
+                <label>انتخاب دسترسی ها</label><br />
                 <select class="select2 form-controlk" multiple="" name="permission[]">
                     @foreach (var item in Enum.GetNames(typeof(Permission)))
                     {

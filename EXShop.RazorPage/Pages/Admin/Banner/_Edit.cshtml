@@ -1,6 +1,9 @@
 ﻿@using EXShop.RazorPage.Models.Banners
 @model EditBannerCommand
-
+@{
+    ViewData["Title"] = "ویرایش بنر ها";
+    ViewData["selected"] = "banners";
+}
 <form method="post" data-ajax="true" asp-page="Index" asp-page-handler="EditBanner" enctype="multipart/form-data">
     <div class="row">
         @Html.HiddenFor(a=>a.Id)

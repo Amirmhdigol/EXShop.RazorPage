@@ -12,6 +12,10 @@ public class Directories
     {
         return $"{SiteSettings.ServerPath}{SliderImages}/{imageName}";
     }
+    public static string GetUserImages(string imageName)
+    {
+        return $"{SiteSettings.ServerPath}{UserAvatars}/{imageName}";
+    }
     public static string GetBannerImage(string imageName)
     {
         return $"{SiteSettings.ServerPath}{BannerImages}/{imageName}";
@@ -19,5 +23,9 @@ public class Directories
     public static string GetProductImage(string imageName)
     {
         return $"{SiteSettings.ServerPath}{ProductImages}/{imageName}";
+    }
+    public static string GetProductGalleryImages(string imageName)
+    {
+        return $"{SiteSettings.ServerPath}{ProductGalleryImages}/{imageName}";
     }
 }

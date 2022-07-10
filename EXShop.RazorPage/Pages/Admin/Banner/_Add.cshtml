@@ -1,4 +1,8 @@
 ﻿@model EXShop.RazorPage.Models.Banners.CreateBannerCommand
+@{
+    ViewData["Title"] = "افزودن بنر ها";
+    ViewData["selected"] = "banners";
+}
 
 <form method="post" data-ajax="true" asp-page="Index" asp-page-handler="CreateBanner" enctype="multipart/form-data">
     <div class="row">

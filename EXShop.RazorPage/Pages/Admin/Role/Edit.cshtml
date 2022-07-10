@@ -3,6 +3,7 @@
 @model EXShop.RazorPage.Pages.Admin.Role.EditModel
 @{
     ViewData["Title"] = "ویرایش نقش";
+    ViewData["selected"] = "roles";
 }
 <h3>@ViewData["Title"]</h3>
 
@@ -18,19 +19,21 @@
                     @foreach (var item in Enum.GetNames(typeof(Permission)))
                     {
                         <div class="col-md-4">
-                            @{var id = Guid.NewGuid();}
+                            @{
+                                var id = Guid.NewGuid();
+                            }
                             <div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
                                 <label class="mb-0 d-block">@item.Replace("_"," ")</label>
                                 <input type="checkbox" value="@item" checked="@(Model.Permissioms.Any(a=>a.ToString()==item))" class="custom-control-input" name="permissions" id="@id">
-                                <label class="custom-control-label" for="@id">
-                                    <span class="switch-icon-left"><i class="bx bx-check"></i></span>
-                                    <span class="switch-icon-right"><i class="bx bx-check"></i></span>
-                                </label>
+                                    <label class="custom-control-label" for="@id">
+                                        <span class="switch-icon-left"><i class="bx bx-check"></i></span>
+                                        <span class="switch-icon-right"><i class="bx bx-check"></i></span>
+                                    </label>
                             </div>
                         </div>
                     }
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
     <div class="card-footer text-left">

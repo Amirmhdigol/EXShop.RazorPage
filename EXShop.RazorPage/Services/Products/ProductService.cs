@@ -15,7 +15,7 @@ public class ProductService : IProductService
         _client = client;
     }
 
-    public async Task<ApiResult?> AddProductImage(AddProductImageCommand command)
+    public async Task<ApiResult> AddProductImage(AddProductImageCommand command)
     {
         var formData = new MultipartFormDataContent
         {
@@ -92,7 +92,7 @@ public class ProductService : IProductService
     {
         var res = await _client.GetFromJsonAsync<ApiResult<ProductDTO>>($"product/{productId}");
         return res?.Data;
-    }
+     }
 
     public async Task<ProductDTO?> GetProductBySlug(string slug)
     {
@@ -110,7 +110,7 @@ public class ProductService : IProductService
         return result?.Data;
     }
 
-    public async Task<ApiResult?> RemoveProductImage(RemoveProductImageCommand command)
+    public async Task<ApiResult> RemoveProductImage(RemoveProductImageCommand command)
     {
         var json = JsonConvert.SerializeObject(command);
         var message = new HttpRequestMessage(HttpMethod.Delete, $"{ModuleName}/images")

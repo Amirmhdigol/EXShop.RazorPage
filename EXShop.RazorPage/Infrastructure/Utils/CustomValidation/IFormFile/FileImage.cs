@@ -30,6 +30,12 @@ namespace EXShop.RazorPage.Infrastructure.Utils.CustomValidation.IFormFile
         {
             try
             {
+                //if (OperatingSystem.IsWindows())
+                //{
+
+                //}
+                //else
+                //    throw new Exception("Not Windows Operation System");
                 var img = Image.FromStream(file.OpenReadStream());
                 return true;
             }

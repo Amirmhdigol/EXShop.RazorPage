@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EXShop.RazorPage.Infrastructure.RazorUtil;
-public class BaseRazorFilter<TFilterParam> : PageModel where TFilterParam : BaseFilterParam
+public class BaseRazorFilter<TFilterParam> : BaseRazorPage where TFilterParam : BaseFilterParam
 {
     [BindProperty(SupportsGet = true)]
     public TFilterParam FilterParams { get; set; }

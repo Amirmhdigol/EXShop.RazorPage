@@ -2,16 +2,17 @@
 @model EXShop.RazorPage.Pages.Admin.Slider.AddModel
 @{
     ViewData["Title"] = "افزودن اسلایدر";
+    ViewData["selected"] = "sliders";
 }
 
 <form method="post" class="card" enctype="multipart/form-data">
     <div class="row card-body">
         <div class="col-md-6">
             @Html.EditorFor(a=>a.Title)
-        </div> 
+        </div>
         <div class="col-md-6">
             @Html.EditorFor(a=>a.Url)
-        </div> 
+        </div>
         <div class="col-md-6">
             @Html.EditorFor(a=>a.ImageFile)
         </div>

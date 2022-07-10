@@ -1,0 +1,27 @@
+﻿@page "{userId}"
+@using EXShop.RazorPage.Models.Roles
+@model EXShop.RazorPage.Pages.Admin.User.UserRolesModel
+@{
+    ViewData["title"] = "نقش های کاربر";
+    ViewData["selected"] = "users";
+}
+<h3>@ViewData["title"]</h3>
+<div class="table-responsive card card-body p-0">
+    <table class="table table-bordered mb-0">
+        <thead>
+            <tr>
+                <th>نام</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Model.Permissions.Title
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-page="/Admin/Role/Edit" asp-route-id="@Model.Permissions.Id">مشاهده و ویرایش دسترسی ها</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

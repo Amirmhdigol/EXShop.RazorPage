@@ -9,11 +9,11 @@ public class UserDTO : BaseDTO
     public Gender Gender { get; set; }
     public bool IsActive { get; set; }
     public string PhoneNumber { get; set; }
-    public List<UserRoleDTO> UserRoles { get; set; }
+    public long RoleId { get; set; }
 }
 public class UserRoleDTO
 {
-    public string RoleTitle { get; set; }
+    public string? RoleTitle { get; set; }
     public long RoleId { get; set; }
 }
 public class UserFilterData : BaseDTO
@@ -24,6 +24,7 @@ public class UserFilterData : BaseDTO
     public string UserAvatar { get; set; }
     public Gender Gender { get; set; }
     public string PhoneNumber { get; set; }
+    public long RoleId { get; set; }
 }
 public class UserFilterParams : BaseFilterParam
 {

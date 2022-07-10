@@ -48,8 +48,17 @@ public class LoginModel : BaseRazorPage
         }
         var token = res.Data.Token;
         var Retoken = res.Data.RefreshToken;
-        HttpContext.Response.Cookies.Append("token", token);
-        HttpContext.Response.Cookies.Append("Refreshtoken", Retoken);
+
+        HttpContext.Response.Cookies.Append("token", token,new CookieOptions
+        {
+            HttpOnly = true,
+            Expires= DateTimeOffset.Now.AddDays(7),
+        });
+        HttpContext.Response.Cookies.Append("Refreshtoken", Retoken, new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = DateTimeOffset.Now.AddDays(10),
+        });
 
         if (!string.IsNullOrWhiteSpace(RedirectTo)) return LocalRedirect(RedirectTo);
 

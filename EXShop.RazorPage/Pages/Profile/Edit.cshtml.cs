@@ -55,7 +55,7 @@ public class EditModel : BaseRazorPage
 
     public async Task<IActionResult> OnPost()
     {
-        var result = await _userService.EditCurrentUser(new EditUserCommand()
+        var result = await _userService.EditCurrentUser(new EditUserCommand() 
         {
             PhoneNumber = PhoneNumber,
             Family = Family,

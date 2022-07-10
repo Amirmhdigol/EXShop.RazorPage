@@ -1,4 +1,51 @@
-﻿@page
+﻿@page "{userId}"
+@using EXShop.RazorPage.Infrastructure
+@using EXShop.RazorPage.Services.Roles
 @model EXShop.RazorPage.Pages.Admin.User.EditModel
+@inject IRoleService _roleService;
 @{
+    ViewData["title"] = "ویرایش کاربران";
+    ViewData["selected"] = "users";
+    var UserRole = await _roleService.GetRoles();
 }
+
+<form class="card" method="post" enctype="multipart/form-data">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.EditorFor(a=>a.Name)
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(a=>a.Family)
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(a=>a.IsActive)
+            </div>
+            <div class="col-md-3">
+                @Html.EditorFor(a=>a.Gender)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(a=>a.Email)
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(a=>a.PhoneNumber)
+            </div>
+            <div class="col-md-5">
+                @Html.EditorFor(a=>a.ImageFile)
+            </div>
+            <div class="col-md-4">
+                <label asp-for="RoleId"></label>
+                <select asp-for="RoleId" class="form-control select2">
+                    @foreach (var item in UserRole)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-left">
+        <cancel></cancel>
+        <submit />
+    </div>
+</form>
