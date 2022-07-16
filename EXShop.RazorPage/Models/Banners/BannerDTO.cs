@@ -7,6 +7,8 @@ public class BannerDTO : BaseDTO
 }
 public enum BannerPosition
 {
-    Under_Slider,
-    Right_Of_Slider
+    Middle_Page,
+    Top_Of_Slider,
+    Left_Of_Slider,
+    Right_Of_Special
 }

@@ -2,6 +2,7 @@
 using EXShop.RazorPage.Services.Banners;
 using EXShop.RazorPage.Services.Categories;
 using EXShop.RazorPage.Services.Comments;
+using EXShop.RazorPage.Services.MainPage;
 using EXShop.RazorPage.Services.Orders;
 using EXShop.RazorPage.Services.Products;
 using EXShop.RazorPage.Services.Roles;
@@ -21,6 +22,8 @@ public static class RegisterServicesDI
         services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
         services.AddTransient<IRenderViewToString, RenderViewToString>();
         services.AddAutoMapper(typeof(MapperProfile).Assembly);
+
+        services.AddScoped<IMainPageService, MainPageService>();
 
         services.AddHttpClient<IAuthService, AuthService>(httpClient =>
         {
