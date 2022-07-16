@@ -13,6 +13,7 @@ public class SellersService : ISellerService
         _client = client;
     }
 
+
     public async Task<ApiResult?> Create(CreateSellerCommand command)
     {
         var res = await _client.PostAsJsonAsync("seller", command);
@@ -22,6 +23,17 @@ public class SellersService : ISellerService
     public async Task<ApiResult?> Edit(EditSellerCommand command)
     {
         var res = await _client.PutAsJsonAsync("seller", command);
+        return await res.Content.ReadFromJsonAsync<ApiResult?>();
+    }
+    public async Task<ApiResult?> AddSellerInventory(AddSellerInventoryCommand command)
+    {
+        var res = await _client.PostAsJsonAsync("seller/addInventory", command);
+        return await res.Content.ReadFromJsonAsync<ApiResult?>();
+    }
+
+    public async Task<ApiResult?> EditSellerInventory(EditSellerInventoryCommand command)
+    {
+        var res = await _client.PutAsJsonAsync("seller/editInventory", command);
         return await res.Content.ReadFromJsonAsync<ApiResult?>();
     }
 
@@ -34,6 +46,18 @@ public class SellersService : ISellerService
     public async Task<SellerDTO?> GetSellerByUserId()
     {
         var res = await _client.GetFromJsonAsync<ApiResult<SellerDTO>>($"seller/current");
+        return res?.Data;
+    }
+
+    public async Task<List<InventoryDTO>?> GetSellerInventories()
+    {
+        var res = await _client.GetFromJsonAsync<ApiResult<List<InventoryDTO>>>("seller/inventory");
+        return res?.Data;
+    }
+
+    public async Task<InventoryDTO?> GetSellerInventoryById(long inventoryId)
+    {
+        var res = await _client.GetFromJsonAsync<ApiResult<InventoryDTO>>($"seller/inventory/{inventoryId}");
         return res?.Data;
     }
 

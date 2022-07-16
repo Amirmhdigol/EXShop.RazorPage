@@ -37,7 +37,7 @@ public class ApiResult
             IsReload = isReload,
             MetaData = new MetaData()
             {
-                AppStatusCode = AppStatusCode.ServerError,
+                AppStatusCode = AppStatusCode.Success,
                 Message = message
             }
         };
@@ -49,7 +49,7 @@ public class ApiResult
             IsSuccess = true,
             MetaData = new MetaData()
             {
-                AppStatusCode = AppStatusCode.ServerError,
+                AppStatusCode = AppStatusCode.Success,
                 Message = "عملیات با موفقیت انجام شد"
             }
         };
@@ -72,6 +72,19 @@ public class ApiResult<TData>
             {
                 AppStatusCode = AppStatusCode.Success,
                 Message = "عملیات با موفقیت انجام شد"
+            }
+        };
+    }
+    public static ApiResult<TData> Error(TData data)
+    {
+        return new ApiResult<TData>()
+        {
+            IsSuccess = false,
+            Data = data,
+            MetaData = new MetaData()
+            {
+                AppStatusCode = AppStatusCode.ServerError,
+                Message = "ناموفقامیز بود"
             }
         };
     }

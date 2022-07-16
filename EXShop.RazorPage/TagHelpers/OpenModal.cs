@@ -3,7 +3,7 @@
 namespace EXShop.RazorPage.TagHelpers;
 public class OpenModal : TagHelper
 {
-    public string Class { get; set; } = "btn btn-success";
+    public string Class { get; set; } = "btn btn-primary";
     public string ModalTitle { get; set; } = "";
     public string Url { get; set; }
 

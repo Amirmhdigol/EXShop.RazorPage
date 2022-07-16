@@ -1,0 +1,41 @@
+﻿@page
+@using EXShop.RazorPage.Models.Products
+@using EXShop.RazorPage.Services.Products
+@model EXShop.RazorPage.Pages.SellerPanel.Inventories.AddModel
+@inject IProductService _productService;
+@{
+    ViewData["Title"] = "افزودن موجودیت محصول";
+    ViewData["selected"] = "inventories";
+
+    var products = await _productService.GetProductByFilter(new ProductFilterParams()
+            {
+                PageId = 1,
+                Take = 100
+            });
+}
+<form method="post" class="card" enctype="multipart/form-data">
+    <div class="row card-body">
+        <div class="col-md-6">
+            <label>انتخاب محصول</label>
+            <select asp-for="ProductId" class="form-control select2">
+                @foreach (var item in products.Data)
+                {
+                    <option value="@item.Id">@item.Title</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(a=>a.Count)
+        </div>
+        <div class="col-md-3">
+            @Html.EditorFor(a=>a.Price)
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(a=>a.DiscountPercentage)
+        </div>
+    </div>
+    <div class="card-footer text-left">
+        <cancel></cancel>
+        <submit/>
+    </div>
+</form>

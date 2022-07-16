@@ -1,6 +1,7 @@
 using EXShop.RazorPage.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,11 +12,17 @@ builder.Services.AddAuthorization(option =>
     {
         builder.RequireAuthenticatedUser();
     });
+    option.AddPolicy("SellerPanel", builder =>
+    {
+        builder.RequireAuthenticatedUser();
+        builder.RequireAssertion(a => a.User.Claims.Any(b => b.Type == ClaimTypes.Role && b.Value == "5"));
+    });
 });
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddRazorPagesOptions(options =>
 {
     options.Conventions.AuthorizeFolder("/Profile", "Account");
+    options.Conventions.AuthorizeFolder("/SellerPanel", "SellerPanel");
 });
 
 builder.Services.RegisterApiServices();

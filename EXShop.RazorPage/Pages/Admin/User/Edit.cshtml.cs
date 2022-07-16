@@ -25,8 +25,8 @@ public class EditModel : BaseRazorPage
     public string? Email { get; set; }
 
     [Display(Name = "تصویر پروفایل")]
+    [FileImage(ErrorMessage = "not valid image")]
     public IFormFile? ImageFile { get; set; }
-    public string? UserAvatar { get; set; }
 
     [Display(Name = "ژنسیت")]
     [Required(ErrorMessage = "{0} را وارد کنید")]
@@ -52,7 +52,6 @@ public class EditModel : BaseRazorPage
         Family = user.Family;
         Email = user.Email;
         PhoneNumber = user.PhoneNumber;
-        UserAvatar = user.UserAvatar;
         IsActive = user.IsActive;
         Gender = user.Gender;
         RoleId = user.RoleId;

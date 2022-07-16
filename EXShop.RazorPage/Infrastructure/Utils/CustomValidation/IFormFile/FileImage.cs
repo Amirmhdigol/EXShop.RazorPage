@@ -19,7 +19,7 @@ namespace EXShop.RazorPage.Infrastructure.Utils.CustomValidation.IFormFile
         public void AddValidation(ClientModelValidationContext context)
         {
             if (!context.Attributes.ContainsKey("data-val"))
-                context.Attributes.Add("data-val", "true");
+                  context.Attributes.Add("data-val", "true");
             context.Attributes.Add("accept", "image/*");
             context.Attributes.Add("data-val-fileImage", ErrorMessage);
         }
@@ -30,12 +30,6 @@ namespace EXShop.RazorPage.Infrastructure.Utils.CustomValidation.IFormFile
         {
             try
             {
-                //if (OperatingSystem.IsWindows())
-                //{
-
-                //}
-                //else
-                //    throw new Exception("Not Windows Operation System");
                 var img = Image.FromStream(file.OpenReadStream());
                 return true;
             }

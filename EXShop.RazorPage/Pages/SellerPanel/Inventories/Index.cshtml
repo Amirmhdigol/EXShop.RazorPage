@@ -1,0 +1,49 @@
+﻿@page "{handler?}"
+@using EXShop.RazorPage.Infrastructure
+@model EXShop.RazorPage.Pages.SellerPanel.Inventories.IndexModel
+@{
+    ViewData["title"] = "مدیریت محصولات ";
+    ViewData["selected"] = "inventories";
+}
+<a asp-page="Add" class="btn btn-success mb-2">افزودن محصول جدید</a>
+<div class="card">
+    <div class="table-responsive card-body p-0"></div>
+    <table class="table table-bordered mb-0 table-hover text-center">
+        <thead>
+            <tr>
+                <th>عکس محصول</th>
+                <th>عنوان محصول</th>
+                <th>قیمت</th>
+                <th>موجودی</th>
+                <th>درصد تخفیف</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Inventories)
+            {
+                <tr>
+                    <td>
+                        <img src="@Directories.GetProductImage(item.ProductImage)" style="max-width: 200px" />
+                    </td>
+                    <td>@item.ProductTitle</td>
+                    <td>@item.Price.ToString("#,0") تومان</td>
+                    <td>@item.Count</td>
+                    <td>@item.DiscountPercentage %</td>
+                    <td>
+                        <open-modal url="@Url.Page("Index","EditPage",new {inventoryId = item.Id})"
+                                modal-title="ویرایش محصول">
+                            ویرایش
+                        </open-modal>
+                    </td>
+                </tr>
+            }
+            @if (Model.Inventories.Any() == false)
+            {
+                <tr>
+                    <td class="text-center" colspan="5">موردی برای نمایش وجود ندارد</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
