@@ -31,7 +31,7 @@
                     @foreach (var item in Model.MainPageData.Sliders)
                     {
                         <div class="swiper-slide">
-                            <a href="#">
+                            <a href="@item.Link">
                                 <img src="@Directories.GetSliderImage(item.ImageName)" alt="@item.Title">
                             </a>
                         </div>
@@ -61,7 +61,7 @@
                     <div class="col-lg-12 col-sm-6 col-12">
                         <div class="banner mb-3">
                             <a href="@item.Link">
-                                <img src="@Directories.GetSliderImage(item.ImageName)" alt="leftSlider">
+                                <img src="@Directories.GetBannerImage(item.ImageName)" alt="leftSlider">
                             </a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                     <div class="col-lg-12 col-sm-6 col-12">
                         <div class="banner mb-4">
                             <a href="#">
-                                <img src="@Directories.GetSliderImage(item.ImageName)" alt="rightSlider">
+                                <img src="@Directories.GetBannerImage(item.ImageName)" alt="rightSpecial">
                             </a>
                         </div>
                     </div>
@@ -184,10 +184,10 @@
     {
         @foreach (var item in middlePage.Take(2).ToList())
         {
-            <div class="col-lg-12 col-sm-6 col-12">
+            <div class="col-lg-6 col-sm-6 col-12">
                 <div class="banner mb-3">
                     <a href="@item.Link">
-                        <img src="@Directories.GetSliderImage(item.ImageName)" alt="mSlider">
+                        <img src="@Directories.GetBannerImage(item.ImageName)" alt="mSlider">
                     </a>
                 </div>
             </div>

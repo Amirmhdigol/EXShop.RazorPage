@@ -96,13 +96,13 @@ public class ProductService : IProductService
 
     public async Task<ProductDTO?> GetProductBySlug(string slug)
     {
-        var res = await _client.GetFromJsonAsync<ApiResult<ProductDTO>>($"product/{slug}");
+        var res = await _client.GetFromJsonAsync<ApiResult<ProductDTO>>($"product/byslug/{slug}");
         return res?.Data;
     }
 
     public async Task<ProductShopResult?> GetProductsForShopByFilter(ProductShopFilterParam filterParams)
     {
-        var url = $"{ModuleName}?pageId={filterParams.PageId}&take={filterParams.Take}" +
+        var url = $"{ModuleName}/shop?pageId={filterParams.PageId}&take={filterParams.Take}" +
                         $"&categorySlug={filterParams.CategorySlug}&onlyAvailableProducts={filterParams.OnlyAvailableProducts}" +
                         $"&search={filterParams.Search}&SearchOrderBy={filterParams.SearchOrderBy}&JustHasDiscount={filterParams.JustHasDiscount}";
 
@@ -119,5 +119,11 @@ public class ProductService : IProductService
         };
         var result = await _client.SendAsync(message);
         return await result.Content.ReadFromJsonAsync<ApiResult>();
+    }
+
+    public async Task<SingleProductDTO?> GetProductForSinglePageBySlug(string slug)
+    {
+        var res = await _client.GetFromJsonAsync<ApiResult<SingleProductDTO>>($"product/ForShopSingle/{slug}");
+        return res?.Data;
     }
 }

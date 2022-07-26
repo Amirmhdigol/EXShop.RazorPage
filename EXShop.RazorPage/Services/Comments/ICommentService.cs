@@ -10,4 +10,5 @@ public interface ICommentService
 
     Task<CommentDTO?> GetCommentById(long commentId);
     Task<CommentFilterResult?> GetCommentsFiltered(CommentFilterParams filterParams);
+    Task<CommentFilterResult?> GetProductComments(long productId, int pageId, int take);
 }

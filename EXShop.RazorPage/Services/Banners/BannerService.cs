@@ -18,7 +18,7 @@ public class BannerService : IBannerService
         formData.Add(new StringContent(command.Link), "Link");
         formData.Add(new StreamContent(command.ImageFile.OpenReadStream()), "ImageFile", command.ImageFile.FileName);
         formData.Add(new StringContent(command.Position.ToString()), "Position");
-        
+
         var result = await _client.PostAsync("banner", formData);
         return await result.Content.ReadFromJsonAsync<ApiResult>();
     }
@@ -28,7 +28,7 @@ public class BannerService : IBannerService
         var formData = new MultipartFormDataContent();
         formData.Add(new StringContent(command.Link), "Link");
         if (command.ImageFile != null && command.ImageFile.IsImage())
-            formData.Add(new StreamContent(command.ImageFile.OpenReadStream()), "ImageFile");
+            formData.Add(new StreamContent(command.ImageFile.OpenReadStream()), "ImageFile", command.ImageFile.FileName);
         formData.Add(new StringContent(command.Position.ToString()), "Position");
         formData.Add(new StringContent(command.Id.ToString()), "Id");
 
@@ -36,7 +36,7 @@ public class BannerService : IBannerService
         return await result.Content.ReadFromJsonAsync<ApiResult>();
     }
 
-    public async Task<ApiResult?> DeleteBanner(long bannerId)   
+    public async Task<ApiResult?> DeleteBanner(long bannerId)
     {
         var result = await _client.DeleteAsync($"banner/{bannerId}");
         return await result.Content.ReadFromJsonAsync<ApiResult>();

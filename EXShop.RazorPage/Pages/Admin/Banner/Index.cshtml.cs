@@ -17,7 +17,7 @@ public class IndexModel : BaseRazorPage
     }
     public List<BannerDTO> Banners { get; set; }
   
-    public async Task OnGet()
+    public async Task OnGet()   
     {
         Banners = await _bannerService.GetBannersList();
     }
