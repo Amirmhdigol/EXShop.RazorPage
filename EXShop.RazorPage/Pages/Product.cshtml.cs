@@ -33,11 +33,16 @@ public class ProductModel : BaseRazorPage
     {
         if (!User.Identity.IsAuthenticated) return Page();
         var result = await _commentService.AddComment(new AddCommentCommand
-        {
+        { 
             ProductId = productId,
             Text = comment,
             UserId = User.GetUserId()
         });
+        if (result.IsSuccess == false)
+        {
+            ErrorAlert(result.MetaData.Message);
+            return Page();
+        }
         SuccessAlert("Your comment will be registered after qualification approval");
         return RedirectToPage("Product", new { slug });
     }
@@ -45,5 +50,10 @@ public class ProductModel : BaseRazorPage
     {
         var commentResult = await _commentService.GetProductComments(productId, pageId, 12);
         return Partial("Shared/Products/_Comments", commentResult);
+    }
+
+    public async Task<IActionResult> OnPostdeleteComment(long id)
+    {
+        return await AjaxTryCatch(() => _commentService.DeleteComment(id));
     }
 }

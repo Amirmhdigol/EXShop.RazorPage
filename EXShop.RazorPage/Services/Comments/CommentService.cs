@@ -60,4 +60,10 @@ public class CommentService : ICommentService
         var result = await _client.GetFromJsonAsync<ApiResult<CommentFilterResult>>(url);
         return result?.Data;
     }
+
+    public async Task<ApiResult?> DeleteComment(long commentId)
+    {
+        var result = await _client.DeleteAsync($"comment/{commentId}");
+        return await result.Content.ReadFromJsonAsync<ApiResult>();
+    }
 }

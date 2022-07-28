@@ -12,7 +12,7 @@ public interface IProductService
     //Queries
     Task<ProductDTO?> GetProductById(long productId);
     Task<ProductFilterResult?> GetProductByFilter(ProductFilterParams filterParams);
-    Task<ProductShopResult?> GetProductsForShopByFilter(ProductShopFilterParam filterParams);
+    Task<ProductShopResult> GetProductsForShopByFilter(ProductShopFilterParam filterParams);
     Task<ProductDTO?> GetProductBySlug(string slug);
     Task<SingleProductDTO?> GetProductForSinglePageBySlug(string slug);
 }

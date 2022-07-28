@@ -92,7 +92,7 @@ public class ProductService : IProductService
     {
         var res = await _client.GetFromJsonAsync<ApiResult<ProductDTO>>($"product/{productId}");
         return res?.Data;
-     }
+    }
 
     public async Task<ProductDTO?> GetProductBySlug(string slug)
     {
@@ -104,7 +104,9 @@ public class ProductService : IProductService
     {
         var url = $"{ModuleName}/shop?pageId={filterParams.PageId}&take={filterParams.Take}" +
                         $"&categorySlug={filterParams.CategorySlug}&onlyAvailableProducts={filterParams.OnlyAvailableProducts}" +
-                        $"&search={filterParams.Search}&SearchOrderBy={filterParams.SearchOrderBy}&JustHasDiscount={filterParams.JustHasDiscount}";
+                        $"&search={filterParams.Search}&SearchOrderBy={filterParams.SearchOrderBy}";
+        if (filterParams.JustHasDiscount != null)
+            url += $"&JustHasDiscount ={filterParams.JustHasDiscount}";
 
         var result = await _client.GetFromJsonAsync<ApiResult<ProductShopResult>>(url);
         return result?.Data;
