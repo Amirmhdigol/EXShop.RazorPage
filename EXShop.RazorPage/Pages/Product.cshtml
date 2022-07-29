@@ -4,7 +4,7 @@
 @{
     var inventory = Model.Product.Inventories.OrderBy(t => t.ToTalPrice).FirstOrDefault();
 }
-<input type="hidden" id="productId" value="@Model.Product.Product.Id"/>
+<input type="hidden" id="productId" value="@Model.Product.Product.Id" />
 <div class="row mb-1">
     <div class="col-12">
         <div class="breadcrumb mb-1">
@@ -127,7 +127,7 @@
                         <div class="num-block">
                             <div class="num-in">
                                 <span class="plus"></span>
-                                <input type="text" class="in-num" value="1" readonly="">
+                                <input type="text" class="in-num" id="item_count" value="1" readonly="">
                                 <span class="minus dis"></span>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="#" class="add-to-cart">
+                        <a href="javasctipt:void()" onclick="addToCartWithCount('@inventory.Id')" class="add-to-cart">
                             افزودن به سبد خرید
                         </a>
                     </div>
@@ -336,9 +336,9 @@
     </div>
 </div>
 @section Scripts
-{
+    {
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             var productId = $("#productId").val();
             $.ajax({
                 url: `/product/slug/ProductComments?productId=${productId}&pageId=1`,
@@ -346,6 +346,34 @@
             }).done(function(data) {
                 $("#comments").html(data);
             });
-        })
+        });
+
+        function addToCartWithCount(id) {
+            var count = $("#item_count").val();
+            if (count <= 0)
+                count = 1;
+            addToCart(id, count);
+};
+
+        function addToCart(inventoryId, count) {
+            var token = $("#ajax-token input[name='__RequestVerificationToken']").val();
+
+            $.ajax({
+                url: `/shopcart/addItem?inventoryId=${inventoryId}&count=${count}`,
+                type: "post",
+                data: {
+                    __RequestVerificationToken: token
+                },
+                beforeSend: function(xhr) {
+                    $(".loading").show();
+                },
+                complete: function() {
+                    $(".loading").hide();
+                },
+            }).done(function(data) {
+                var res = JSON.parse(data);
+                CallBackHandler(res);
+            });
+        }
     </script>
 }

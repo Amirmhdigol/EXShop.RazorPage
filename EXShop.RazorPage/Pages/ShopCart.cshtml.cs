@@ -22,7 +22,7 @@ public class ShopCartModel : BaseRazorPage
         }
         else
         {
-            
+
         }
     }
     public async Task<IActionResult> OnPostDeleteItem(long id)
@@ -45,6 +45,22 @@ public class ShopCartModel : BaseRazorPage
     {
         if (User.Identity.IsAuthenticated)
         {
+            var currentOrder = await _orderService.GetCurrentOrder();
+            if (currentOrder.Items != null)
+            {
+                var items = currentOrder.Items;
+                var alreadyhaditem = items.FirstOrDefault(a => a.InventoryId == inventoryId);
+
+                if (alreadyhaditem != null)
+                {
+                    return await AjaxTryCatch(() => _orderService.IncreaseItemCount(new ChangeOrderItemCountCommand
+                    {
+                        Count = 1,
+                        ItemId = alreadyhaditem.Id,
+                        UserId = User.GetUserId()
+                    }));
+                }
+            }
             return await AjaxTryCatch(() => _orderService.AddOrderItem(new AddOrderItemCommand
             {
                 UserId = User.GetUserId(),
@@ -56,5 +72,25 @@ public class ShopCartModel : BaseRazorPage
         {
             return Page();
         }
+    }
+
+    public async Task<IActionResult> OnPostIncreaseItem(long id)
+    {
+        return await AjaxTryCatch(() => _orderService.IncreaseItemCount(new ChangeOrderItemCountCommand
+        {
+            Count = 1,
+            ItemId = id,
+            UserId = User.GetUserId()
+        }));
+    }
+    
+    public async Task<IActionResult> OnPostDecreaseItem(long id)
+    {
+        return await AjaxTryCatch(() => _orderService.DecreaseItemCount(new ChangeOrderItemCountCommand
+        {
+            Count = 1,
+            ItemId = id,
+            UserId = User.GetUserId()
+        }));
     }
 }

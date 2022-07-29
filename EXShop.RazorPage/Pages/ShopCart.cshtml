@@ -4,7 +4,7 @@
 @{
     ViewData["title"] = "سبد خرید";
 }
-@if (Model.OrderDto == null)
+@if (Model.OrderDto == null || Model.OrderDto.Items.Count == 0)
 {
     <div class="text-center">
         <div class="alert alert-danger">سبد خرید شما خالی می باشد</div>
@@ -60,9 +60,9 @@ else
                                             <div class="item-quantity">
                                                 <div class="num-block">
                                                     <div class="num-in">
-                                                        <span class="plus"></span>
+                                                        <span class="plus" onclick="pluse('@item.Id')"></span>
                                                         <input type="text" class="in-num" value="@item.Count" readonly>
-                                                        <span class="minus dis"></span>
+                                                        <span onclick="minus('@item.Id')" class="minus @(item.Count==1?"dis":null)"></span>
                                                     </div>
                                                 </div>
                                                 <delete-item class="item-remove-btn mr-3" url="@Url.Page("ShopCart","DeleteItem",new {id=item.Id})">
@@ -98,4 +98,34 @@ else
             </div>
         </div>
     </div>
+}
+@section Scripts
+{
+    <script>
+        var token = $("#ajax-token input[name='__RequestVerificationToken']").val();
+        function pluse(id) {
+            $.ajax({
+                url: "/shopcart/IncreaseItem?id=" + id,
+                type: "post",
+                data: {
+                    __RequestVerificationToken: token
+                },
+            }).done(function(data) {
+                var res = JSON.parse(data);
+                CallBackHandler(res);
+            });
+        }
+        function minus(id) {
+            $.ajax({
+                url: "/shopcart/DecreaseItem?id=" + id,
+                type: "post",
+                data: {
+                    __RequestVerificationToken: token
+                },
+            }).done(function(data) {
+                var res = JSON.parse(data);
+                CallBackHandler(res);
+            });
+        }
+    </script>
 }
