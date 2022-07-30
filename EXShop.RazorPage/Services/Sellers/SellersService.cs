@@ -69,4 +69,10 @@ public class SellersService : ISellerService
         var result = await _client.GetFromJsonAsync<ApiResult<SellerFilterResult>>(url);
         return result.Data;
     }
+
+    public async Task<InventoryDTO?> GetSellerInventoryByIdForAll(long inventoryId)
+    {
+        var res = await _client.GetFromJsonAsync<ApiResult<InventoryDTO>>($"seller/inventory/ForAll/{inventoryId}");
+        return res?.Data;
+    }
 }

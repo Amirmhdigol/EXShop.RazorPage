@@ -1,4 +1,6 @@
 using EXShop.RazorPage.Infrastructure;
+using EXShop.RazorPage.Infrastructure.CookieUtil;
+using EXShop.RazorPage.Models;
 using EXShop.RazorPage.Models.Orders;
 using EXShop.RazorPage.Services.Orders;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +10,14 @@ namespace EXShop.RazorPage.Pages;
 public class ShopCartModel : BaseRazorPage
 {
     private readonly IOrderService _orderService;
-    public ShopCartModel(IOrderService orderService)
+    private readonly ShopCartCookieManager _cookieManager;
+    public ShopCartModel(IOrderService orderService, ShopCartCookieManager cookieManager)
     {
         _orderService = orderService;
+        _cookieManager = cookieManager;
     }
-
     public OrderDTO? OrderDto { get; set; }
+   
     public async Task OnGet()
     {
         if (User.Identity.IsAuthenticated)
@@ -22,9 +26,10 @@ public class ShopCartModel : BaseRazorPage
         }
         else
         {
-
+            OrderDto = _cookieManager.GetShopCart();
         }
     }
+    
     public async Task<IActionResult> OnPostDeleteItem(long id)
     {
         if (User.Identity.IsAuthenticated)
@@ -33,11 +38,14 @@ public class ShopCartModel : BaseRazorPage
             {
                 ItemId = id
             }));
-            return RedirectToPage("ShopCart");
         }
         else
         {
-            return Page();
+            return await AjaxTryCatch(async () =>
+            {
+                _cookieManager.DeleteItem(id);
+                return ApiResult.Success();
+            });
         }
     }
 
@@ -70,27 +78,49 @@ public class ShopCartModel : BaseRazorPage
         }
         else
         {
-            return Page();
+            return await AjaxTryCatch(async () => await _cookieManager.AddItem(inventoryId, count));
         }
     }
 
     public async Task<IActionResult> OnPostIncreaseItem(long id)
     {
-        return await AjaxTryCatch(() => _orderService.IncreaseItemCount(new ChangeOrderItemCountCommand
+        if (User.Identity.IsAuthenticated)
         {
-            Count = 1,
-            ItemId = id,
-            UserId = User.GetUserId()
-        }));
+            return await AjaxTryCatch(() => _orderService.IncreaseItemCount(new ChangeOrderItemCountCommand
+            {
+                Count = 1,
+                ItemId = id,
+                UserId = User.GetUserId()
+            }));
+        }
+        else
+        {
+            return await AjaxTryCatch(async () =>
+            {
+                _cookieManager.Increase(id);
+                return ApiResult.Success();
+            });
+        }
     }
-    
+
     public async Task<IActionResult> OnPostDecreaseItem(long id)
     {
-        return await AjaxTryCatch(() => _orderService.DecreaseItemCount(new ChangeOrderItemCountCommand
+        if (User.Identity.IsAuthenticated)
         {
-            Count = 1,
-            ItemId = id,
-            UserId = User.GetUserId()
-        }));
+            return await AjaxTryCatch(() => _orderService.DecreaseItemCount(new ChangeOrderItemCountCommand
+            {
+                Count = 1,
+                ItemId = id,
+                UserId = User.GetUserId()
+            }));
+        }
+        else
+        {
+            return await AjaxTryCatch(async () =>
+            {
+                _cookieManager.Decrease(id);
+                return ApiResult.Success();
+            });
+        }
     }
 }

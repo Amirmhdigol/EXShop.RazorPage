@@ -93,14 +93,21 @@ else
                 </div>
                 <hr>
                 <div class="d-flex px-3 py-4">
-                    <a href="/chekout" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-page="Chekout" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
+                    }
+                    else
+                    {
+                        <a asp-page="/auth/Login" class="btn btn-danger btn-block py-2">ادامه فرایند خرید</a>
+                    }
                 </div>
             </div>
         </div>
     </div>
 }
 @section Scripts
-{
+    {
     <script>
         var token = $("#ajax-token input[name='__RequestVerificationToken']").val();
         function pluse(id) {

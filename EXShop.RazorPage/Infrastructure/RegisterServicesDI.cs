@@ -1,4 +1,5 @@
-﻿using EXShop.RazorPage.Services.Auth;
+﻿using EXShop.RazorPage.Infrastructure.CookieUtil;
+using EXShop.RazorPage.Services.Auth;
 using EXShop.RazorPage.Services.Banners;
 using EXShop.RazorPage.Services.Categories;
 using EXShop.RazorPage.Services.Comments;
@@ -24,7 +25,9 @@ public static class RegisterServicesDI
         services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
         services.AddScoped<IMainPageService, MainPageService>();
+        services.AddScoped<ShopCartCookieManager>();
 
+        services.AddCookieManager(); 
         services.AddHttpClient<IAuthService, AuthService>(httpClient =>
         {
             httpClient.BaseAddress = new Uri(baseAddress);

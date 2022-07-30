@@ -16,4 +16,5 @@ public interface ISellerService
     Task<SellerFilterResult?> GetSellersByFilter(SellerFilterParams filterParams);
     Task<List<InventoryDTO>?> GetSellerInventories();
     Task<InventoryDTO?> GetSellerInventoryById(long inventoryId);
+    Task<InventoryDTO?> GetSellerInventoryByIdForAll(long inventoryId);
 }
